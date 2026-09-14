@@ -4,7 +4,7 @@ public class Weapon
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
 
-    public Weapon(string name, int attackValue, int defenseValue = 0)
+    public Weapon(string name, int attackValue, int defenseValue)
     {
         Name = name;
         AttackValue = attackValue;
