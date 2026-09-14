@@ -55,6 +55,35 @@ namespace Ucu.Poo.RolePlayGame
             wizard.Cure();
 
             Console.WriteLine("Health after cure: " + wizard.Health);
+
+            // Creación del enano y de sus equipamientos
+            
+            Weapon axe = new Weapon("Hacha Pesada", 30, 5);
+            Armor armor = new Armor("Armadura de Hierro", 8, 20);
+
+            Dwarf dwarf = new Dwarf("Gimli", 120);
+
+            // Equipamiento del personaje
+            dwarf.EquipWeapon(axe);
+            dwarf.EquipArmor(armor);
+
+            // Mostrar estadísticas iniciales
+            Console.WriteLine("Dwarf: " + dwarf.Name);
+            Console.WriteLine("Health: " + dwarf.Health);
+            Console.WriteLine("Attack: " + dwarf.CalculateAttack());
+            Console.WriteLine("Defense: " + dwarf.CalculateDefense());
+            Console.WriteLine();
+
+            // Simulación de ataque recibido
+            Console.WriteLine("Gimli receives an attack of 40.");
+            dwarf.ReceiveAttack(40);
+            Console.WriteLine("Health after attack: " + dwarf.Health);
+            Console.WriteLine();
+
+            // Simulación de curación
+            Console.WriteLine("Gimli is cured.");
+            dwarf.Cure();
+            Console.WriteLine("Health after cure: " + dwarf.Health);
         }
     }
 }
