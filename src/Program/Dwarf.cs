@@ -1,59 +1,154 @@
 
 public class Dwarf
 {
-    // Atributos
-    public string Name { get; set; }
-    public int Health { get; set; }
-    private int InitialHealth { get; set; }
-    public Weapon Weapon { get; set; }
-    public Robe Robe { get; set; }
-    public Armor Armor { get; set; }
+    // Atributos privados
 
-    public Dwarf(string name)
+    private string _name;
+    private int _health;
+    private int _maxHealth;
+
+    // Equipamiento actual del enano
+    private Weapon _weapon;
+    private Robe _robe;
+    private Armor _armor;
+
+    // Constructor
+    public Dwarf(string name, int initialHealth)
     {
-        Name = name;
-        InitialHealth = 120; // Valor inicial por defecto
-        Health = InitialHealth;
+        this._name = name;
+        this._maxHealth = initialHealth;
+        this._health = initialHealth;
+        this._weapon = null;
+        this._robe = null;
+        this._armor = null;
+    }
+    //Propiedades Públicas
+    public string Name
+    {
+        get { return this._name; }
     }
 
-    // Calcula el ataque total sumando el de todos los objetos equipados
-    public int AttackValue
+    public int Health
     {
-        get
+        get { return this._health; }
+    }
+
+    public int MaxHealth
+    {
+        get { return this._maxHealth; }
+    }
+     public Weapon Weapon
+    {
+        get { return this._weapon; }
+    }
+    public Robe Robe
+    {
+        get { return this._robe; }
+    }
+
+    public Armor Armor
+    {
+        get { return this._armor; }
+    }
+    // Método que suma el ataque de todos los elementos equipados
+     public int CalculateAttack()
+    {
+        int totalAttack = 0;
+
+        if (this._weapon != null)
         {
-            int total = 0;
-            if (Weapon != null) total += Weapon.AttackValue;
-            if (Robe != null) total += Robe.AttackValue;
-            if (Armor != null) total += Armor.AttackValue;
-            return total;
+            totalAttack += this._weapon.AttackValue;
         }
-    }
 
-    // Calcula la defensa total sumando la de todos los objetos equipados
-    public int DefenseValue
-    {
-        get
+        if (this._robe != null)
         {
-            int total = 0;
-            if (Weapon != null) total += Weapon.DefenseValue;
-            if (Robe != null) total += Robe.DefenseValue;
-            if (Armor != null) total += Armor.DefenseValue;
-            return total;
+            totalAttack += this._robe.AttackValue;
         }
+
+        if (this._armor != null)
+        {
+            totalAttack += this._armor.AttackValue;
+        }
+
+        return totalAttack;
+    }
+    // Método que suma la defensa de todos los elementos equipados.
+    public int CalculateDefense()
+    {
+        int totalDefense = 0;
+
+        if (this._weapon != null)
+        {
+            totalDefense += this._weapon.DefensiveValue;
+        }
+
+        if (this._robe != null)
+        {
+            totalDefense += this._robe.DefensiveValue;
+        }
+
+        if (this._armor != null)
+        {
+            totalDefense += this._armor.DefensiveValue;
+        }
+
+        return totalDefense;
     }
 
+    //Gestión de equipamiento
+     public void EquipWeapon(Weapon weapon)
+    {
+        this._weapon = weapon;
+    }
+
+    public void RemoveWeapon()
+    {
+        this._weapon = null;
+    }
+     public void EquipRobe(Robe robe)
+    {
+        this._robe = robe;
+
+        // Armor y Robe son mutuamente excluyentes
+        this._armor = null;
+    }
+    public void RemoveRobe()
+    {
+        this._robe = null;
+    }
+    public void EquipArmor(Armor armor)
+    {
+        this._armor = armor;
+
+        // Armor y Robe son mutuamente excluyentes
+        this._robe = null;
+    }
+
+    public void RemoveArmor()
+    {
+        this._armor = null;
+    }
+    // Método que recibe un ataque y reduce la vida del enano según su defensa.
     public void ReceiveAttack(int power)
     {
-        int damage = power - DefenseValue;
-        if (damage > 0)
+        int damage = power - this.CalculateDefense();
+
+        // Si la defensa supera o iguala al ataque, el daño es 0
+        if (damage < 0)
         {
-            Health -= damage;
-            if (Health < 0) Health = 0;
+            damage = 0;
+        }
+        //Evita que la salud del enano sea negativa.
+        this._health -= damage;
+
+        if (this._health < 0)
+        {
+            this._health = 0;
         }
     }
-
+    //Restaura la salud actual del enano a su nivel máximo inicial
     public void Cure()
     {
-        Health = InitialHealth;
+        this._health = this._maxHealth;
     }
 }
