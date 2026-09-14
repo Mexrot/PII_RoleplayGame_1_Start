@@ -90,13 +90,13 @@ public class DwarfTests
         Robe robe = new Robe("Túnica", 5, 10);
         Armor armor = new Armor("Placas", 0, 25);
 
-        Dwarf dwarf = new Dwarf("Gimli", 120);
-        dwarf.EquipRobe(robe);
+        Elf elf = new Elf("Legolas", 90);
+        elf.EquipRobe(robe);
         
         // Al equipar armadura, se desequipa la túnica
-        dwarf.EquipArmor(armor);
+        elf.EquipArmor(armor);
 
-        Assert.That(dwarf.Robe, Is.Null);
-        Assert.That(dwarf.Armor, Is.EqualTo(armor));
+        Assert.That(elf.Robe, Is.Null);
+        Assert.That(elf.Armor, Is.EqualTo(armor));
     }
 }
