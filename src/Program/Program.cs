@@ -84,6 +84,33 @@ namespace Ucu.Poo.RolePlayGame
             Console.WriteLine("Gimli is cured.");
             dwarf.Cure();
             Console.WriteLine("Health after cure: " + dwarf.Health);
+
+            // Creación del elfo y de sus equipamientos
+    
+            Elf elf = new Elf("Legolas", 90);
+            Robe robe = new Robe("Tunica Elfica", 12, 15);
+
+            // Equipamiento del personaje
+            elf.EquipSpellsBook(book);
+            elf.EquipRobe(robe);
+
+            // Mostrar estadísticas iniciales
+            Console.WriteLine("Elf: " + elf.Name);
+            Console.WriteLine("Health: " + elf.Health);
+            Console.WriteLine("Attack: " + elf.CalculateAttack());
+            Console.WriteLine("Defense: " + elf.CalculateDefense());
+            Console.WriteLine();
+
+            // Simulación de ataque recibido
+            Console.WriteLine("Legolas receives an attack of 40.");
+            elf.ReceiveAttack(40);
+            Console.WriteLine("Health after attack: " + elf.Health);
+            Console.WriteLine();
+
+            // Simulación de curación
+            Console.WriteLine("Legolas is cured.");
+            elf.Cure();
+            Console.WriteLine("Health after cure: " + elf.Health);
         }
     }
 }
