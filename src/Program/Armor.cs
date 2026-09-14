@@ -1,13 +1,31 @@
 public class Armor
 {
-    public string Name { get; set; }
-    public int AttackValue { get; set; }
-    public int DefenseValue { get; set; }
+    // Atributos privados
+    private string _name;
+    private int _attackValue;
+    private int _defensiveValue;
 
-    public Armor(string name, int defenseValue, int attackValue)
+    // Constructor que recibe tanto el valor de ataque como el valor defensivo
+    public Armor(string name, int attackValue, int defensiveValue)
     {
-        Name = name;
-        DefenseValue = defenseValue;
-        AttackValue = attackValue;
+        this._name = name;
+        this._attackValue = attackValue;
+        this._defensiveValue = defensiveValue;
+    }
+
+    // Getters públicos de solo lectura
+    public string Name
+    {
+        get { return this._name; }
+    }
+
+    public int AttackValue
+    {
+        get { return this._attackValue; }
+    }
+
+    public int DefensiveValue
+    {
+        get { return this._defensiveValue; }
     }
 }
